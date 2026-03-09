@@ -1,0 +1,79 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vidur\\Documents\\My sliit\\Y 3 S 1\\DS\\restaurant-service\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EA1677C1-AB40-400B-90A2-674AEFE428EB}|RestaurantService\\RestaurantService.csproj|c:\\users\\vidur\\documents\\my sliit\\y 3 s 1\\ds\\restaurant-service\\restaurantservice\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{EA1677C1-AB40-400B-90A2-674AEFE428EB}|RestaurantService\\RestaurantService.csproj|solutionrelative:restaurantservice\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA1677C1-AB40-400B-90A2-674AEFE428EB}|RestaurantService\\RestaurantService.csproj|c:\\users\\vidur\\documents\\my sliit\\y 3 s 1\\ds\\restaurant-service\\restaurantservice\\dockerfile.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{EA1677C1-AB40-400B-90A2-674AEFE428EB}|RestaurantService\\RestaurantService.csproj|solutionrelative:restaurantservice\\dockerfile.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA1677C1-AB40-400B-90A2-674AEFE428EB}|RestaurantService\\RestaurantService.csproj|c:\\users\\vidur\\documents\\my sliit\\y 3 s 1\\ds\\restaurant-service\\restaurantservice\\.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{EA1677C1-AB40-400B-90A2-674AEFE428EB}|RestaurantService\\RestaurantService.csproj|solutionrelative:restaurantservice\\.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\vidur\\Documents\\My sliit\\Y 3 S 1\\DS\\restaurant-service\\RestaurantService\\Dockerfile",
+              "RelativeDocumentMoniker": "RestaurantService\\Dockerfile",
+              "ToolTip": "C:\\Users\\vidur\\Documents\\My sliit\\Y 3 S 1\\DS\\restaurant-service\\RestaurantService\\Dockerfile",
+              "RelativeToolTip": "RestaurantService\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-15T16:57:43.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "dockerfile.txt",
+              "DocumentMoniker": "C:\\Users\\vidur\\Documents\\My sliit\\Y 3 S 1\\DS\\restaurant-service\\RestaurantService\\dockerfile.txt",
+              "RelativeDocumentMoniker": "RestaurantService\\dockerfile.txt",
+              "ToolTip": "C:\\Users\\vidur\\Documents\\My sliit\\Y 3 S 1\\DS\\restaurant-service\\RestaurantService\\dockerfile.txt*",
+              "RelativeToolTip": "RestaurantService\\dockerfile.txt*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-03-15T16:57:21.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": ".dockerignore",
+              "DocumentMoniker": "C:\\Users\\vidur\\Documents\\My sliit\\Y 3 S 1\\DS\\restaurant-service\\RestaurantService\\.dockerignore",
+              "RelativeDocumentMoniker": "RestaurantService\\.dockerignore",
+              "ToolTip": "C:\\Users\\vidur\\Documents\\My sliit\\Y 3 S 1\\DS\\restaurant-service\\RestaurantService\\.dockerignore",
+              "RelativeToolTip": "RestaurantService\\.dockerignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-15T16:57:21.066Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

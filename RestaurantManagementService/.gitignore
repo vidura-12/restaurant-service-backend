@@ -1,0 +1,68 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/RestaurantService/.vs/RestaurantService
+# ASP.NET Core 8 .gitignore
+
+# Ignore build and runtime files
+bin/
+obj/
+out/
+publish/
+
+# Ignore local development files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userprefs
+
+# Ignore NuGet packages and restore files
+.nuget/
+packages/
+*.nupkg
+NuGet.exe
+NuGet.Config
+
+# Ignore local secrets and app settings
+appsettings.Development.json
+secrets.json
+
+# Ignore Azure Functions artifacts
+local.settings.json
+
+# Ignore Docker files
+
+
+# Ignore logs and diagnostics
+logs/
+*.log
+*.csv
+
+# Ignore IDE-specific files
+.DS_Store
+*.swp
+*.swo
+
+# Ignore test results
+TestResults/
+*.trx
+
+# Ignore Rider-specific files
+*.sln.iml
+*.csproj.iml
+
+# Ignore npm and Node.js files (if applicable)
+node_modules/
+npm-debug.log
+
+# Ignore other common files
+.env
+.env.local
+.env.development
+.env.production
+RestaurantService/RestaurantService/appsettings.Development.json
+appsettings.json
+/appsettings.json

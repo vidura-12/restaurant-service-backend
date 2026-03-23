@@ -1,5 +1,4 @@
 name: CI for Restaurant Service
-
 on:
   push:
     branches:

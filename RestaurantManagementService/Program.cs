@@ -7,83 +7,67 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// ✅ Run on 8080
+builder.WebHost.UseUrls("http://0.0.0.0:8080");
+
+// DB
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add UserService to DI container
-builder.Services.AddTransient<UserService>(); // Register UserService
+// Services
+builder.Services.AddTransient<UserService>();
+builder.Services.AddScoped<IMenuItemService, MenuItemService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<RestaurantService>();
+builder.Services.AddScoped<JwtService>();
 
 builder.Services.AddControllers();
 
+// Auth
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // Configure token validation parameters
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true, // Validate the issuer
-            ValidateAudience = true, // Validate the audience
-            ValidateLifetime = true, // Validate the token expiration
-            ValidateIssuerSigningKey = true, // Validate the signing key
-            ValidIssuer = builder.Configuration["Jwt:Issuer"], // Issuer from configuration
-            ValidAudience = builder.Configuration["Jwt:Audience"], // Audience from configuration
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])), // Signing key from configuration
-            RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" // IMPORTANT!
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+            RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         };
     });
 
-// Add Swagger for API documentation
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IMenuItemService, MenuItemService>();
-
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:5173")
-                  .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials(); // Allow cookies/authentication
-        });
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
 });
 
-var context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
-    .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-    .Options);
-// Register RestaurantService (singleton since it's stateless)
-builder.Services.AddSingleton(new RestaurantService(builder.Configuration.GetConnectionString("DefaultConnection"), context));
-
-// Register JwtService for JWT handling
-builder.Services.AddScoped<JwtService>();
-builder.Services.AddScoped<IMenuService, MenuService>();
-
-// REMOVE HTTPS Redirection (since we are not using HTTPS in the container)
-builder.Services.AddHttpsRedirection(options =>
-{
-    // No need to set a port, we will use HTTP only.
-    options.HttpsPort = 0;
-});
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCors("AllowFrontend"); // Enable CORS for frontend
+app.UseRouting();
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-// Force the application to listen on HTTP 8080 (not HTTPS)
-app.Run("http://0.0.0.0:8080"); // Bind to HTTP onl
-
+app.Run();

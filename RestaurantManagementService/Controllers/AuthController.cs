@@ -22,7 +22,7 @@ namespace RestaurantManagementService.Controllers
             _context = context;
             _userService = userService;
             string connectionString = configuration.GetConnectionString("DefaultConnection");
-            _userService = new UserService(connectionString, _context);
+            _userService = userService;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegistrationDto registrationDto)
@@ -30,7 +30,7 @@ namespace RestaurantManagementService.Controllers
             try
             {
                 // Hash the password
-                var hashedPassword = new UserService().HashPassword(registrationDto.Password);
+                var hashedPassword = _userService.HashPassword(registrationDto.Password);
 
                 // Register the user
                 var registrationSuccess = await _userService.RegisterUserAsync(

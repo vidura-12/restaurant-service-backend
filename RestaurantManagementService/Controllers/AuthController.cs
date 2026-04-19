@@ -14,14 +14,11 @@ namespace RestaurantManagementService.Controllers
     public class AuthController : ControllerBase
     {
         private readonly JwtService _jwtService;
-        private readonly ApplicationDbContext _context;
         private readonly UserService _userService;
-        public AuthController(JwtService jwtService, ApplicationDbContext context, UserService userService, IConfiguration configuration)
+
+        public AuthController(JwtService jwtService, UserService userService)
         {
             _jwtService = jwtService;
-            _context = context;
-            _userService = userService;
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
             _userService = userService;
         }
         [HttpPost("register")]

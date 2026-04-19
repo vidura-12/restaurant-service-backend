@@ -13,12 +13,11 @@ namespace RestaurantManagementService.Services
     {
         private readonly string _connectionString;
         private readonly ApplicationDbContext _context;
-
-
-        public RestaurantService(IConfiguration configuration, ApplicationDbContext context)
+        public RestaurantService(string connectionString, ApplicationDbContext context)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
             _context = context;
+
+            _connectionString = connectionString;
         }
         public async Task<IEnumerable<Restaurant>> GetRestaurantsByOwnerEmailAsync(string email, int ownerId)
         {

@@ -66,3 +66,4 @@ npm-debug.log
 RestaurantService/RestaurantService/appsettings.Development.json
 appsettings.json
 /appsettings.json
+Data\ApplicationDbContext.cs

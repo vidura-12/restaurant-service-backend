@@ -6,8 +6,8 @@
         public string Email { get; set; } // 'lg_email' changed to 'Email'
         public string PasswordHash { get; set; } // 'lg_password' changed to 'PasswordHash'
         public int RoleId { get; set; } // 'lg_RoleId' changed to 'RoleId'
-        public int RestaurantId { get; set; } // 'lg_RoleId' changed to 'RoleId'
-        public string RoleName { get; set; } // 'il_RoleName' changed to 'RoleName'
+        public int? RestaurantId { get; set; } // The '?' allows NULL
+        public string? RoleName { get; set; }
     }
 
 }

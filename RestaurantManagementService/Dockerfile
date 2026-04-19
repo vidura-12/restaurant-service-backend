@@ -1,25 +1,24 @@
-﻿# Use the official .NET 8.0 SDK image to build the app
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy the solution and project files from the root context
+# 1. Copy the solution and project file
 COPY *.sln .
 COPY RestaurantManagementService/*.csproj ./RestaurantManagementService/
+
+# 2. Restore (This will now find the files)
 RUN dotnet restore
 
-# Copy the rest of the code
+# 3. Copy everything else
 COPY . .
 
-# Move into the project directory to publish
+# 4. Build
 WORKDIR /app/RestaurantManagementService
 RUN dotnet publish -c Release -o /out
 
-# Use the ASP.NET runtime image to run the app
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /out .
 
-# Set environment variables for the container
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 

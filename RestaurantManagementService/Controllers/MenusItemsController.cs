@@ -33,7 +33,7 @@ namespace RestaurantManagementService.Controllers
                 return Ok(result);
             }
             
-            [Authorize]
+       
             [HttpGet("{restaurantId}/menus/{menuId}/items")]
             public async Task<IActionResult> GetMenuItems(int restaurantId, int menuId)
             {
@@ -46,7 +46,7 @@ namespace RestaurantManagementService.Controllers
             }
 
             // ✅ Get a specific menu item by id
-            [Authorize]
+        
             [HttpGet("{restaurantId}/menus/{menuId}/items/{menuItemId}")]
             public async Task<IActionResult> GetMenuItem(int restaurantId, int menuId, int menuItemId)
             {
@@ -60,7 +60,7 @@ namespace RestaurantManagementService.Controllers
 
             // ✅ Add a menu item
             [HttpPost("{restaurantId}/menus/{menuId}/items")]
-            [Authorize]
+         
             public async Task<IActionResult> AddMenuItem(int restaurantId, int menuId, [FromBody] MenuItemDto menuItemDto)
             {
                 if (!ModelState.IsValid)
@@ -84,7 +84,7 @@ namespace RestaurantManagementService.Controllers
 
             // ✅ Update a menu item
             [HttpPut("{restaurantId}/menus/{menuId}/items/{menuItemId}")]
-            [Authorize]
+           
             public async Task<IActionResult> UpdateMenuItem(int restaurantId, int menuId, int menuItemId, [FromBody] MenuItemDto menuItemDto)
             {
                 if (!ModelState.IsValid)
@@ -107,7 +107,7 @@ namespace RestaurantManagementService.Controllers
 
             // ✅ Delete a menu item
             [HttpDelete("{restaurantId}/menus/{menuId}/items/{menuItemId}")]
-            [Authorize]
+          
             public async Task<IActionResult> DeleteMenuItem(int restaurantId, int menuId, int menuItemId)
             {
                     var result = await _menuItemService.ManageMenuItemAsync(

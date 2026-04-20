@@ -7,7 +7,7 @@ namespace RestaurantManagementService.Controllers
 {
     [ApiController]
     [Route("api/restaurant/[controller]")]
-    [Authorize]
+    
     public class MenusController : ControllerBase // Use ControllerBase for APIs
     {
         private readonly IMenuService _menuService;
@@ -18,7 +18,7 @@ namespace RestaurantManagementService.Controllers
         }
 
         [HttpPost("{restaurantId}/menus")]
-        [Authorize]
+        
         public async Task<IActionResult> AddMenu(int restaurantId, [FromBody] MenuDto menuDto)
         {
             if (!ModelState.IsValid)
@@ -38,7 +38,7 @@ namespace RestaurantManagementService.Controllers
         }
 
         [HttpPut("{restaurantId}/menus/{menuId}")]
-        [Authorize]
+       
         public async Task<IActionResult> UpdateMenu(int restaurantId, int menuId, [FromBody] MenuDto menuDto)
         {
             if (!ModelState.IsValid)
@@ -58,7 +58,7 @@ namespace RestaurantManagementService.Controllers
         }
 
         [HttpDelete("{restaurantId}/menus/{menuId}")]
-        [Authorize]
+        
         public async Task<IActionResult> DeleteMenu(int restaurantId, int menuId)
         {
             var result = await _menuService.ManageMenuAsync(

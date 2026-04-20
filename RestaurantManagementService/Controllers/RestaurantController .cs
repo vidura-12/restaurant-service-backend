@@ -42,7 +42,7 @@ namespace RestaurantManagementService.Controllers
             }
 
             [HttpPost("add-restaurant")]
-    
+            [Authorize]
             public async Task<IActionResult> AddRestaurant([FromBody] RestaurantDto restaurantDto)
             {
                 try
@@ -87,7 +87,7 @@ namespace RestaurantManagementService.Controllers
           
 
             [HttpPut("update-restaurant/{restaurantId}")]
-     
+            [Authorize]
             public async Task<IActionResult> UpdateRestaurant(int restaurantId, [FromBody] RestaurantDto restaurantDto)
             {
                 try
@@ -132,7 +132,7 @@ namespace RestaurantManagementService.Controllers
 
 
             [HttpDelete("delete-restaurant/{restaurantId}")]
- 
+            [Authorize]
             public async Task<IActionResult> DeleteRestaurant(int restaurantId)
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -165,7 +165,7 @@ namespace RestaurantManagementService.Controllers
                 return Ok(result);
             }
             [HttpGet("get-restaurants")]
-    
+            [Authorize]
             public async Task<IActionResult> GetRestaurantsForOwner()
             {
                 try
@@ -197,7 +197,7 @@ namespace RestaurantManagementService.Controllers
             }
 
             [HttpGet("get-restaurant-menu/{restaurantId}")]
-
+            [Authorize]
             public async Task<IActionResult> GetRestaurantMenu(int restaurantId)
             {
 
@@ -207,7 +207,7 @@ namespace RestaurantManagementService.Controllers
                 return await _restaurantService.GetRestaurantMenusAsync(restaurantId, userId);
             }
             [HttpGet("get-all-restaurant-menuitems/")]
- 
+            [Authorize]
             public async Task<IActionResult> GetRestaurantMenuItems()
             {
 

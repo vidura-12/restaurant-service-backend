@@ -47,7 +47,7 @@ namespace RestaurantManagementService.Services
         public async Task<IActionResult> GetRestaurantMenusAsync(int restaurantId, int userId)
         {
             // Query the RB_RESTAURANTS_MENUS view
-            var menus = await _context.Menus
+            var menus = await _context.RB_RESTAURANTS_MENUS
                 .Where(rm => rm.RestaurantId == restaurantId)
                 .ToListAsync();
 
@@ -61,7 +61,7 @@ namespace RestaurantManagementService.Services
         public async Task<IActionResult> GetRestaurantMenusItemsAsync()
         {
             // Query the RB_RESTAURANTS_MENUS view
-            var menus = await _context.MenuItems
+            var menus = await _context.RB_RESTAURANTS_ITEMSMENUS
 
                 .ToListAsync();
 

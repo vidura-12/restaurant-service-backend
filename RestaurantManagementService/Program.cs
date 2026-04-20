@@ -39,18 +39,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IMenuItemService, MenuItemService>();
 
-builder.Services.AddCors(options =>
-{
+builder.Services.AddCors(options => {
     options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:5173")
+        policy => {
+            policy.WithOrigins("https://glowing-sunshine-d907db.netlify.app", "http://localhost:5173")
                   .AllowAnyMethod()
                   .AllowAnyHeader()
-                  .AllowCredentials(); // Allow cookies/authentication
+                  .AllowCredentials();
         });
 });
-
 var context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
     .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
     .Options);

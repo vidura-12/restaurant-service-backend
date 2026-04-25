@@ -39,12 +39,17 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.sources=RestaurantManagementService
 
-      # Snyk SCA Scan (Using the specialized .NET action)
+      # -------------------------------
+      # Snyk SCA Scan (Updated & Fixed)
+      # -------------------------------
+      - name: Install Snyk CLI
+        uses: snyk/actions/setup@master
+
       - name: Snyk Open Source Scan
-        uses: snyk/actions/dotnet@master
+        run: snyk test --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
+          with:
           command: test
           args: --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj
 

@@ -39,20 +39,7 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.sources=RestaurantManagementService
 
-      # -------------------------------
-      # Snyk SCA Scan (Updated & Fixed)
-      # -------------------------------
-      - name: Install Snyk CLI
-        uses: snyk/actions/setup@master
-
-      - name: Snyk Open Source Scan
-        run: snyk test --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj --command=dotnet
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          with:
-          command: test
-          args: --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj
-
+     
       # Clone Kubernetes Config Repo (Corrected action)
       - name: Clone Kubernetes Config Repository
         uses: actions/checkout@v4

@@ -17,21 +17,29 @@ jobs:
           fetch-depth: 0 # Required for SonarCloud to analyze git history
 
       # --- DEVSECOPS: SAST SCAN (SonarCloud) ---
+      # This addresses the "mandatory properties" error from your logs
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=vidura-12_restaurant-service-backend
+            -Dsonar.organization=vidura-12
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.sources=RestaurantManagementService
 
       # --- DEVSECOPS: SCA SCAN (Snyk) ---
+      # This checks your NuGet dependencies for vulnerabilities
       - name: Snyk Open Source Analysis (SCA)
         uses: snyk/actions/dotnet@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high
+          args: --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj
 
-      # Step 2: Clone Kubernetes Config Repository (Optional)
+      # Step 2: Clone Kubernetes Config Repository
       - name: Clone Kubernetes Config Repository
         uses: actions/checkout@v3
         with:

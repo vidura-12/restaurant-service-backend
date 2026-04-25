@@ -22,7 +22,7 @@ namespace RestaurantManagementService.Controllers
                 _menuItemService = menuItemService;
             }
             
-            [HttpGet("/")]
+            [HttpGet("/all-items")]
             public async Task<IActionResult> GetAllMenuItems(int restaurantId, int menuId)
             {
                 var result = await _menuItemService.GetMenuItemsAsync(restaurantId, menuId);

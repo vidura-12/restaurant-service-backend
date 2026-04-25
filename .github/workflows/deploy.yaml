@@ -31,7 +31,6 @@ jobs:
             -Dsonar.organization=vidura-12
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.sources=RestaurantManagementService
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       # --- DEVSECOPS: SCA SCAN (Snyk) ---
       # Uses the Org slug from your URL: vidura-12

@@ -12,12 +12,11 @@ jobs:
     steps:
       # Step 1: Checkout the code
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Required for SonarCloud to analyze git history
+          fetch-depth: 0 # Required for SonarCloud
 
       # --- DEVSECOPS: SAST SCAN (SonarCloud) ---
-      # This addresses the "mandatory properties" error from your logs
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
@@ -31,17 +30,16 @@ jobs:
             -Dsonar.sources=RestaurantManagementService
 
       # --- DEVSECOPS: SCA SCAN (Snyk) ---
-      # This checks your NuGet dependencies for vulnerabilities
       - name: Snyk Open Source Analysis (SCA)
         uses: snyk/actions/dotnet@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj
+          args: --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj --org=vidura-12
 
       # Step 2: Clone Kubernetes Config Repository
       - name: Clone Kubernetes Config Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: 'Deliveroo-System/ds-project-kubernetes'
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -57,6 +55,5 @@ jobs:
         run: docker build -f RestaurantManagementService/Dockerfile -t vidura12/deliveroo:restaurant-service-latest RestaurantManagementService
 
       # Step 5: Push the Docker image to Docker Hub
-      # This step only runs if SonarCloud and Snyk tests pass!
       - name: Push Docker image to Docker Hub
         run: docker push vidura12/deliveroo:restaurant-service-latest

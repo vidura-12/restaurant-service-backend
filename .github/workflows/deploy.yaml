@@ -16,10 +16,23 @@ jobs:
         with:
           fetch-depth: 0 
 
-      # --- DEVSECOPS: SAST SCAN (SonarCloud) ---
-      # IMPORTANT: Go to SonarCloud.io and manually click "Analyze new project" 
-      # for this repo first to "activate" these keys.
-      # --- DEVSECOPS: SAST SCAN (SonarCloud) ---
+      # -------------------------------
+      # Setup .NET (REQUIRED)
+      # -------------------------------
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x   # change if your project uses 6/7
+
+      # -------------------------------
+      # Restore dependencies (REQUIRED)
+      # -------------------------------
+      - name: Restore .NET dependencies
+        run: dotnet restore RestaurantManagementService/RestaurantManagementService.csproj
+
+      # -------------------------------
+      # SonarCloud Scan (SAST)
+      # -------------------------------
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
@@ -31,37 +44,43 @@ jobs:
             -Dsonar.organization=vidura-12
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.sources=RestaurantManagementService
-            
-      # Restore dependencies (REQUIRED)
-      - name: Restore .NET dependencies
-        run: dotnet restore RestaurantManagementService/RestaurantManagementService.csproj
 
-      # --- DEVSECOPS: SCA SCAN (Snyk) ---
-      # Uses the Org slug from your URL: vidura-12
-      - name: Snyk Open Source Analysis (SCA)
-        uses: snyk/actions/dotnet@master
+      # -------------------------------
+      # Snyk SCA Scan (FIXED VERSION)
+      # -------------------------------
+      - name: Snyk Open Source Scan
+        uses: snyk/actions/dotnet@v3
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj --org=vidura-12
+          command: test
+          args: --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj
 
-      # Step 2: Clone Kubernetes Config Repository
+      # -------------------------------
+      # Clone Kubernetes Config Repo
+      # -------------------------------
       - name: Clone Kubernetes Config Repository
         uses: actions/checkout@v4
         with:
-          repository: 'Deliveroo-System/ds-project-kubernetes'
+          repository: Deliveroo-System/ds-project-kubernetes
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
           path: kubernetes
 
-      # Step 3: Log in to Docker Hub
+      # -------------------------------
+      # Docker Login
+      # -------------------------------
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # Step 4: Build the Docker image
+      # -------------------------------
+      # Build Docker Image
+      # -------------------------------
       - name: Build Docker image
         run: docker build -f RestaurantManagementService/Dockerfile -t vidura12/deliveroo:restaurant-service-latest RestaurantManagementService
 
-      # Step 5: Push the Docker image to Docker Hub
+      # -------------------------------
+      # Push Docker Image
+      # -------------------------------
       - name: Push Docker image to Docker Hub
         run: docker push vidura12/deliveroo:restaurant-service-latest

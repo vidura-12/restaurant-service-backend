@@ -46,7 +46,7 @@ jobs:
         uses: snyk/actions/setup@master
 
       - name: Snyk Open Source Scan
-        run: snyk test --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj
+        run: snyk test --severity-threshold=high --file=RestaurantManagementService/RestaurantManagementService.csproj --command=dotnet
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           with:

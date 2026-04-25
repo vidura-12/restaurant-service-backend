@@ -14,9 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Required for SonarCloud
+          fetch-depth: 0 
 
       # --- DEVSECOPS: SAST SCAN (SonarCloud) ---
+      # IMPORTANT: Go to SonarCloud.io and manually click "Analyze new project" 
+      # for this repo first to "activate" these keys.
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
@@ -30,6 +32,7 @@ jobs:
             -Dsonar.sources=RestaurantManagementService
 
       # --- DEVSECOPS: SCA SCAN (Snyk) ---
+      # Uses the Org slug from your URL: vidura-12
       - name: Snyk Open Source Analysis (SCA)
         uses: snyk/actions/dotnet@master
         env:

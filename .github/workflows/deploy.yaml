@@ -12,7 +12,7 @@ jobs:
     steps:
       # Step 1: Checkout the code
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: snyk/actions/dotnet@v3
         with:
           fetch-depth: 0 
 
@@ -20,7 +20,7 @@ jobs:
       # Setup .NET (REQUIRED)
       # -------------------------------
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: snyk/actions/dotnet@v3
         with:
           dotnet-version: 8.0.x   # change if your project uses 6/7
 
@@ -60,7 +60,7 @@ jobs:
       # Clone Kubernetes Config Repo
       # -------------------------------
       - name: Clone Kubernetes Config Repository
-        uses: actions/checkout@v4
+        uses: snyk/actions/dotnet@v3
         with:
           repository: Deliveroo-System/ds-project-kubernetes
           token: ${{ secrets.GITHUB_TOKEN }}

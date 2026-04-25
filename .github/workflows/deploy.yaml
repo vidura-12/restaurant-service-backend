@@ -31,6 +31,10 @@ jobs:
             -Dsonar.organization=vidura-12
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.sources=RestaurantManagementService
+            
+      # Restore dependencies (REQUIRED)
+      - name: Restore .NET dependencies
+        run: dotnet restore RestaurantManagementService/RestaurantManagementService.csproj
 
       # --- DEVSECOPS: SCA SCAN (Snyk) ---
       # Uses the Org slug from your URL: vidura-12

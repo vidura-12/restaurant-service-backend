@@ -1,18 +1,17 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# 1. Copy the project file from the CURRENT directory
-# Since Dockerfile is in the same folder as the .csproj, just use "."
-COPY ["RestaurantManagementService.csproj", "./"]
+# 1. Copy the project file specifically (matching your screenshot name)
+COPY ["RestaurantManagementService/RestaurantManagementService.csproj", "RestaurantManagementService/"]
 
 # 2. Restore dependencies
-RUN dotnet restore "RestaurantManagementService.csproj"
+RUN dotnet restore "RestaurantManagementService/RestaurantManagementService.csproj"
 
-# 3. Copy everything else from the current folder
+# 3. Copy the entire source code
 COPY . .
 
 # 4. Build and Publish
-# No need to change WORKDIR again since we are already in /src
+WORKDIR "/src/RestaurantManagementService"
 RUN dotnet publish "RestaurantManagementService.csproj" -c Release -o /app/publish
 
 # 5. Runtime Stage

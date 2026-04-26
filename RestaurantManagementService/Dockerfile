@@ -3,14 +3,10 @@ WORKDIR /src
 
 # 1. Copy the project file from the CURRENT directory
 # Since Dockerfile is in the same folder as the .csproj, just use "."
-<<<<<<< HEAD
-COPY ["RestaurantManagementService/RestaurantManagementService.csproj", "./"]
-=======
-COPY ["RestaurantManagementService.csproj", "./"]
->>>>>>> parent of 0b3fba1 (Update Dockerfile)
+COPY ["RestaurantManagementService/RestaurantManagementService.csproj", "RestaurantManagementService/"]
 
 # 2. Restore dependencies
-RUN dotnet restore "RestaurantManagementService.csproj"
+RUN dotnet restore "RestaurantManagementService/RestaurantManagementService.csproj"
 
 # 3. Copy everything else from the current folder
 COPY . .
@@ -21,7 +17,7 @@ RUN dotnet publish "RestaurantManagementService.csproj" -c Release -o /app/publi
 
 # 5. Runtime Stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
-WORKDIR /app
+WORKDIR "/src/RestaurantManagementService"
 COPY --from=build /app/publish .
 
 EXPOSE 8080

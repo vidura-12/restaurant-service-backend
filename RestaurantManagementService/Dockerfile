@@ -3,7 +3,11 @@ WORKDIR /src
 
 # 1. Copy the project file from the CURRENT directory
 # Since Dockerfile is in the same folder as the .csproj, just use "."
+<<<<<<< HEAD
 COPY ["RestaurantManagementService/RestaurantManagementService.csproj", "./"]
+=======
+COPY ["RestaurantManagementService.csproj", "./"]
+>>>>>>> parent of 0b3fba1 (Update Dockerfile)
 
 # 2. Restore dependencies
 RUN dotnet restore "RestaurantManagementService.csproj"
